@@ -2,6 +2,14 @@ import React from "react";
 import ReactDom from "react-dom";
 
 class LikeButton extends React.Component {
+  constructor(props) {
+    super(props);
+    // コンポーネントにカーソルが乗ているかどうかの状態を持たせる
+    this.state = {
+      hovered: false
+    }
+  }
+
   styles() {
     return {
       container: {
@@ -51,11 +59,27 @@ class LikeButton extends React.Component {
     };
   }
 
+  // カーソルが乗った時に状態を変更するイベントハンドラ
+  onMouseEnter() {
+    this.setState({hovered: true});
+  }
+
+  // カーソルが外れた時に状態を変更するイベントハンドラ
+  onMouseLeave() {
+    this.setState({hovered: false});
+  }
+
   render() {
     const styles = this.styles();
+    console.log(this.state); // 状態をログに出す
+
+    // ボタンに onMouseEnter と onMouseLeave のイベントハンドラを割り当てます
     return (
       <span style={styles.container}>
-        <span style={styles.like}>いいね！</span>
+        <span
+          style={styles.like}
+          onMouseEnter={::this.onMouseEnter}
+          onMouseLeave={::this.onMouseLeave}>いいね！</span>
         <span style={styles.counter}>
           <span style={styles.counterBefore}>{" "}</span>999
         </span>
