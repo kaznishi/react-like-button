@@ -71,13 +71,12 @@ class LikeButton extends React.Component {
 
   render() {
     const styles = this.styles();
-    console.log(this.state); // 状態をログに出す
-
-    // ボタンに onMouseEnter と onMouseLeave のイベントハンドラを割り当てます
+    // 状態に応じてスタイルを変更する
+    const likeStyle = this.state.hovered ? {...styles.like, ...styles.likeHover} : styles.like;
     return (
       <span style={styles.container}>
         <span
-          style={styles.like}
+          style={likeStyle}
           onMouseEnter={::this.onMouseEnter}
           onMouseLeave={::this.onMouseLeave}>いいね！</span>
         <span style={styles.counter}>
